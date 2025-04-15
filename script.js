@@ -1,4 +1,213 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Enhanced Theme Toggle Functionality with system preference detection
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    
+    // Check if the user's device prefers dark mode
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    // Function to set theme based on preference
+    function setThemePreference(isDark) {
+        if (isDark) {
+            body.classList.add('dark-theme');
+            animateToDarkMode();
+        } else {
+            body.classList.remove('dark-theme');
+            animateToLightMode();
+        }
+        
+        // Save preference to localStorage
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        
+        // Adjust particle colors based on theme
+        adjustParticleColors();
+    }
+    
+    // Check for saved theme preference or use system preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        setThemePreference(true);
+    } else if (savedTheme === 'light') {
+        setThemePreference(false);
+    } else {
+        // If no saved preference, use system preference
+        setThemePreference(prefersDarkScheme.matches);
+    }
+    
+    // Toggle theme when the button is clicked with enhanced animations
+    themeToggle.addEventListener('click', () => {
+        const isDarkMode = !body.classList.contains('dark-theme');
+        setThemePreference(isDarkMode);
+        
+        // Play toggle animation
+        playToggleAnimation(isDarkMode);
+    });
+    
+    // Listen for changes in system color scheme
+    prefersDarkScheme.addEventListener('change', (e) => {
+        // Only update if user hasn't set a preference
+        if (!localStorage.getItem('theme')) {
+            setThemePreference(e.matches);
+        }
+    });
+    
+    // Function for toggle animation
+    function playToggleAnimation(isDarkMode) {
+        // Create stars or sun rays animation
+        const toggleWrapper = document.querySelector('.theme-toggle-wrapper');
+        
+        // Remove any existing animation elements
+        const existingParticles = toggleWrapper.querySelectorAll('.toggle-particle');
+        existingParticles.forEach(particle => particle.remove());
+        
+        // Create animation particles
+        if (isDarkMode) {
+            // Create stars for dark mode
+            for (let i = 0; i < 10; i++) {
+                createStar(toggleWrapper);
+            }
+        } else {
+            // Create sun rays for light mode
+            for (let i = 0; i < 8; i++) {
+                createRay(toggleWrapper);
+            }
+        }
+        
+        // Main toggle button animation
+        gsap.to(themeToggle, {
+            scale: 1.2,
+            duration: 0.3,
+            yoyo: true,
+            repeat: 1,
+            ease: 'back.out(1.7)',
+            onComplete: () => {
+                // Add a ripple effect
+                const ripple = document.createElement('div');
+                ripple.className = 'toggle-ripple';
+                themeToggle.appendChild(ripple);
+                
+                gsap.to(ripple, {
+                    scale: 2,
+                    opacity: 0,
+                    duration: 0.6,
+                    onComplete: () => ripple.remove()
+                });
+            }
+        });
+    }
+    
+    // Function to create a star particle
+    function createStar(parent) {
+        const star = document.createElement('div');
+        star.classList.add('toggle-particle', 'star');
+        
+        // Random position around the toggle
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 30 + Math.random() * 50;
+        const xPos = Math.cos(angle) * distance;
+        const yPos = Math.sin(angle) * distance;
+        
+        star.style.top = `calc(50% + ${yPos}px)`;
+        star.style.left = `calc(50% + ${xPos}px)`;
+        star.style.animationDuration = `${0.5 + Math.random() * 0.5}s`;
+        
+        parent.appendChild(star);
+        
+        // Remove the star after animation
+        setTimeout(() => {
+            star.remove();
+        }, 1000);
+    }
+    
+    // Function to create a sun ray
+    function createRay(parent) {
+        const ray = document.createElement('div');
+        ray.classList.add('toggle-particle', 'ray');
+        
+        // Position rays in a circle
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 30 + Math.random() * 20;
+        const xPos = Math.cos(angle) * distance;
+        const yPos = Math.sin(angle) * distance;
+        
+        ray.style.top = `calc(50% + ${yPos}px)`;
+        ray.style.left = `calc(50% + ${xPos}px)`;
+        ray.style.transform = `rotate(${angle}rad)`;
+        
+        parent.appendChild(ray);
+        
+        // Remove the ray after animation
+        setTimeout(() => {
+            ray.remove();
+        }, 800);
+    }
+    
+    // Animation to transition to dark mode
+    function animateToDarkMode() {
+        gsap.to('.theme-toggle-thumb', {
+            left: 31,
+            duration: 0.5,
+            ease: 'power4.out'
+        });
+        
+        gsap.to('.theme-toggle-icon.sun', {
+            opacity: 0.5,
+            scale: 0.7,
+            rotate: -90,
+            duration: 0.5
+        });
+        
+        gsap.to('.theme-toggle-icon.moon', {
+            opacity: 1,
+            scale: 1,
+            rotate: 0,
+            duration: 0.5
+        });
+    }
+    
+    // Animation to transition to light mode
+    function animateToLightMode() {
+        gsap.to('.theme-toggle-thumb', {
+            left: 3,
+            duration: 0.5,
+            ease: 'power4.out'
+        });
+        
+        gsap.to('.theme-toggle-icon.sun', {
+            opacity: 1,
+            scale: 1,
+            rotate: 0,
+            duration: 0.5
+        });
+        
+        gsap.to('.theme-toggle-icon.moon', {
+            opacity: 0.5,
+            scale: 0.7,
+            rotate: 90,
+            duration: 0.5
+        });
+    }
+    
+    // Function to adjust particle colors based on the current theme
+    function adjustParticleColors() {
+        const isDarkTheme = body.classList.contains('dark-theme');
+        
+        if (window.particles) {
+            window.particles.forEach(p => {
+                // Adjust particle opacity based on theme
+                p.color = isDarkTheme 
+                    ? `rgba(255, 255, 255, ${Math.random() * 0.6 + 0.4})` // Brighter in dark theme
+                    : `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.3})`; // Normal in light theme
+            });
+        }
+        
+        // Adjust neural network colors if needed
+        const neuralCanvas = document.getElementById('neuralNetworkCanvas');
+        if (neuralCanvas) {
+            neuralCanvas.style.opacity = isDarkTheme ? '0.2' : '0.15';
+        }
+    }
+    
     // Initialize AOS animation library with more dynamic settings
     AOS.init({
         duration: 800,
@@ -464,6 +673,9 @@ document.addEventListener('DOMContentLoaded', function() {
             color: `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.3})` // Random opacity
         });
     }
+    
+    // Store particles globally to allow theme toggle to modify them
+    window.particles = particles;
     
     // Animate particles with more connections
     function animateParticles() {
