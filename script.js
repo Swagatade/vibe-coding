@@ -8,6 +8,306 @@ document.addEventListener('DOMContentLoaded', function() {
         anchorPlacement: 'top-bottom'
     });
 
+    // ========== Auto-framing for all devices ==========
+    function setupResponsiveFraming() {
+        // Get the device type and viewport dimensions
+        const isMobile = window.innerWidth <= 768;
+        const isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
+        const isDesktop = window.innerWidth > 1024;
+        
+        // Set root font size based on viewport width for better scaling
+        const rootFontSize = Math.min(Math.max(window.innerWidth / 100, 14), 20); // Clamp between 14px and 20px
+        document.documentElement.style.fontSize = `${rootFontSize}px`;
+        
+        // Adjust container paddings based on screen size
+        const containers = document.querySelectorAll('.container');
+        containers.forEach(container => {
+            if (isMobile) {
+                container.style.padding = '0 15px';
+            } else if (isTablet) {
+                container.style.padding = '0 25px';
+            } else {
+                container.style.padding = '0 30px';
+            }
+        });
+        
+        // Adjust header height and content for better framing
+        const header = document.querySelector('.header');
+        if (header) {
+            if (isMobile) {
+                header.style.minHeight = '85vh';
+            } else {
+                header.style.minHeight = '100vh';
+            }
+        }
+        
+        // Adjust logo items density based on screen size
+        const floatingLogos = document.querySelectorAll('.logo-item');
+        if (floatingLogos.length > 0) {
+            floatingLogos.forEach((logo, index) => {
+                // Hide some logos on smaller screens to prevent crowding
+                if (isMobile && index % 3 !== 0) {
+                    logo.style.display = 'none';
+                } else if (isTablet && index % 2 !== 0) {
+                    logo.style.display = 'none';
+                } else {
+                    logo.style.display = 'flex';
+                    
+                    // Adjust logo size based on device
+                    if (isMobile) {
+                        logo.style.width = '45px';
+                        logo.style.height = '45px';
+                    } else if (isTablet) {
+                        logo.style.width = '55px';
+                        logo.style.height = '55px';
+                    } else {
+                        logo.style.width = '60px';
+                        logo.style.height = '60px';
+                    }
+                }
+            });
+        }
+        
+        // Adjust navigation bar for mobile
+        const navLinks = document.querySelector('.nav-links');
+        const navContainer = document.querySelector('.nav-container');
+        
+        if (navLinks && navContainer) {
+            if (isMobile) {
+                // Create mobile menu toggle if it doesn't exist
+                if (!document.querySelector('.mobile-menu-toggle')) {
+                    const mobileToggle = document.createElement('div');
+                    mobileToggle.className = 'mobile-menu-toggle';
+                    mobileToggle.innerHTML = '<span></span><span></span><span></span>';
+                    navContainer.appendChild(mobileToggle);
+                    
+                    // Create mobile menu functionality
+                    mobileToggle.addEventListener('click', () => {
+                        navLinks.classList.toggle('active');
+                        mobileToggle.classList.toggle('active');
+                    });
+                    
+                    // Style mobile menu
+                    navLinks.style.position = 'fixed';
+                    navLinks.style.top = '70px';
+                    navLinks.style.left = '0';
+                    navLinks.style.width = '100%';
+                    navLinks.style.backgroundColor = 'rgba(21, 25, 37, 0.95)';
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.padding = '20px';
+                    navLinks.style.gap = '20px';
+                    navLinks.style.transform = 'translateY(-100%)';
+                    navLinks.style.opacity = '0';
+                    navLinks.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                    navLinks.style.zIndex = '99';
+                    
+                    // Style the toggle button
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        .mobile-menu-toggle {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                            width: 30px;
+                            height: 20px;
+                            cursor: pointer;
+                        }
+                        .mobile-menu-toggle span {
+                            display: block;
+                            height: 2px;
+                            background-color: white;
+                            border-radius: 2px;
+                            transition: all 0.3s ease;
+                        }
+                        .mobile-menu-toggle.active span:nth-child(1) {
+                            transform: translateY(9px) rotate(45deg);
+                        }
+                        .mobile-menu-toggle.active span:nth-child(2) {
+                            opacity: 0;
+                        }
+                        .mobile-menu-toggle.active span:nth-child(3) {
+                            transform: translateY(-9px) rotate(-45deg);
+                        }
+                        .nav-links.active {
+                            transform: translateY(0);
+                            opacity: 1;
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+                
+                document.querySelector('.mobile-menu-toggle').style.display = 'flex';
+            } else {
+                // Reset to desktop navigation
+                navLinks.style.position = 'relative';
+                navLinks.style.top = 'auto';
+                navLinks.style.left = 'auto';
+                navLinks.style.width = 'auto';
+                navLinks.style.backgroundColor = 'transparent';
+                navLinks.style.flexDirection = 'row';
+                navLinks.style.padding = '0';
+                navLinks.style.transform = 'none';
+                navLinks.style.opacity = '1';
+                
+                const mobileToggle = document.querySelector('.mobile-menu-toggle');
+                if (mobileToggle) {
+                    mobileToggle.style.display = 'none';
+                }
+            }
+        }
+        
+        // Adjust layout grids based on screen size
+        const grids = document.querySelectorAll('.tool-cards, .focus-areas, .skill-balance-grid, .trend-items');
+        grids.forEach(grid => {
+            if (isMobile) {
+                grid.style.gridTemplateColumns = '1fr';
+                grid.style.gap = '20px';
+            } else if (isTablet) {
+                grid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+                grid.style.gap = '25px';
+            } else {
+                // Reset to original CSS defined in stylesheet
+                grid.style.gridTemplateColumns = '';
+                grid.style.gap = '';
+            }
+        });
+        
+        // Adjust font sizes for better readability on mobile
+        if (isMobile) {
+            document.querySelectorAll('h2').forEach(h2 => {
+                h2.style.fontSize = '2rem';
+            });
+            
+            document.querySelectorAll('h3').forEach(h3 => {
+                h3.style.fontSize = '1.5rem';
+            });
+            
+            document.querySelector('.glitch-text').style.fontSize = '3rem';
+            document.querySelector('.subtitle').style.fontSize = '1.2rem';
+        } else {
+            // Reset to original CSS
+            document.querySelectorAll('h2').forEach(h2 => {
+                h2.style.fontSize = '';
+            });
+            
+            document.querySelectorAll('h3').forEach(h3 => {
+                h3.style.fontSize = '';
+            });
+            
+            const glitchText = document.querySelector('.glitch-text');
+            if (glitchText) glitchText.style.fontSize = '';
+            
+            const subtitle = document.querySelector('.subtitle');
+            if (subtitle) subtitle.style.fontSize = '';
+        }
+        
+        // Adjust table display for mobile
+        const tables = document.querySelectorAll('table');
+        if (isMobile && tables) {
+            tables.forEach(table => {
+                // Add a class for mobile-optimized tables if not already present
+                if (!table.classList.contains('mobile-optimized')) {
+                    table.classList.add('mobile-optimized');
+                    
+                    // Add custom CSS for mobile tables
+                    const mobileTableStyle = document.createElement('style');
+                    mobileTableStyle.textContent = `
+                        .mobile-optimized {
+                            display: block;
+                            width: 100%;
+                            overflow-x: auto;
+                            -webkit-overflow-scrolling: touch;
+                        }
+                        
+                        .mobile-optimized thead, 
+                        .mobile-optimized tbody, 
+                        .mobile-optimized tr, 
+                        .mobile-optimized th, 
+                        .mobile-optimized td {
+                            display: block;
+                        }
+                        
+                        .mobile-optimized thead tr {
+                            position: absolute;
+                            top: -9999px;
+                            left: -9999px;
+                        }
+                        
+                        .mobile-optimized tr {
+                            margin-bottom: 15px;
+                            border: 1px solid rgba(108, 99, 255, 0.2);
+                            border-radius: 12px;
+                            overflow: hidden;
+                        }
+                        
+                        .mobile-optimized td {
+                            position: relative;
+                            padding: 12px 12px 12px 50%;
+                            border: none;
+                            border-bottom: 1px solid #eee;
+                            text-align: left;
+                        }
+                        
+                        .mobile-optimized td:before {
+                            position: absolute;
+                            top: 12px;
+                            left: 12px;
+                            width: 45%;
+                            padding-right: 10px;
+                            white-space: nowrap;
+                            font-weight: bold;
+                            content: attr(data-label);
+                            color: var(--primary);
+                        }
+                    `;
+                    document.head.appendChild(mobileTableStyle);
+                    
+                    // Add data-label attributes to td elements
+                    const headerCells = table.querySelectorAll('thead th');
+                    const headerTexts = Array.from(headerCells).map(th => th.textContent);
+                    
+                    table.querySelectorAll('tbody tr').forEach(row => {
+                        row.querySelectorAll('td').forEach((cell, index) => {
+                            if (headerTexts[index]) {
+                                cell.setAttribute('data-label', headerTexts[index]);
+                            }
+                        });
+                    });
+                }
+            });
+        }
+        
+        // Optimize animations for mobile (reduce complexity for better performance)
+        if (isMobile) {
+            // Reduce particles for better performance
+            const particleCanvas = document.getElementById('particleCanvas');
+            if (particleCanvas && window.particles) {
+                window.particles = window.particles.slice(0, Math.min(window.particles.length, 50));
+            }
+            
+            // Simplify or disable neural network on mobile
+            const neuralCanvas = document.getElementById('neuralNetworkCanvas');
+            if (neuralCanvas) {
+                neuralCanvas.style.opacity = '0.05';
+            }
+        }
+    }
+    
+    // Run initial setup
+    setupResponsiveFraming();
+    
+    // Re-run setup on window resize with debounce
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(setupResponsiveFraming, 250);
+    });
+    
+    // Re-run setup on orientation change for mobile devices
+    window.addEventListener('orientationchange', () => {
+        setTimeout(setupResponsiveFraming, 300);
+    });
+
     // ========== Position and animate floating language logos ==========
     const floatingLogos = document.querySelectorAll('.logo-item');
     const headerContainer = document.querySelector('.header');
