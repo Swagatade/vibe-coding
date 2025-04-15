@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Coding Roadmap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.11.5/dist/ScrollTrigger.min.js"></script>
+</head>
+<body>
+    <div class="cursor-follower"></div>
+
+    <!-- Particle canvas background -->
+    <canvas id="particleCanvas"></canvas>
+    
+    <!-- Neural network background animation -->
+    <canvas id="neuralNetworkCanvas"></canvas>
+
+    <header class="header">
+        <!-- Floating language logos -->
+        <div class="floating-logos">
+            <!-- Programming Languages -->
+            <div class="logo-item" data-speed="1.5" data-delay="0">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" />
+            </div>
+            <div class="logo-item" data-speed="2.2" data-delay="1.2">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" />
+            </div>
+            <div class="logo-item" data-speed="1.8" data-delay="0.5">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
+            </div>
+            <div class="logo-item" data-speed="2.5" data-delay="1.8">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
+            </div>
+            <div class="logo-item" data-speed="1.7" data-delay="0.8">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++" />
+            </div>
+            <div class="logo-item" data-speed="2.0" data-delay="1.5">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C" />
+            </div>
+            <div class="logo-item" data-speed="1.9" data-delay="0.3">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
+            </div>
+            <div class="logo-item" data-speed="2.3" data-delay="0.7">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" />
+            </div>
+            <div class="logo-item" data-speed="1.6" data-delay="1.0">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
+            </div>
+            <div class="logo-item" data-speed="2.1" data-delay="1.7">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" />
+            </div>
+            <div class="logo-item" data-speed="1.8" data-delay="0.9">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" alt="Swift" />
+            </div>
+            <div class="logo-item" data-speed="2.4" data-delay="0.2">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" />
+            </div>
+            
+            <!-- AI and Cloud Platforms (New) -->
+            <div class="logo-item ai-logo" data-speed="2.2" data-delay="1.1">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" />
+            </div>
+            <div class="logo-item ai-logo" data-speed="1.6" data-delay="0.4">
+                <img src="https://gadget.co.za/wp-content/uploads/2020/12/aws-logo-scaled.jpg" alt="AWS" />
+            </div>
+            <div class="logo-item ai-logo" data-speed="2.3" data-delay="0.9">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Google Cloud Platform" />
+            </div>
+            <div class="logo-item ai-logo" data-speed="1.9" data-delay="0.7">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Microsoft Azure" />
+            </div>
+            <div class="logo-item ai-logo" data-speed="2.4" data-delay="1.4">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin" />
+            </div>
+            <div class="logo-item ai-logo" data-speed="1.7" data-delay="0.3">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" />
+            </div>
+            <div class="logo-item ai-logo" data-speed="2.1" data-delay="1.0">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" />
+            </div>
+            
+            <!-- AI Logos with custom SVGs (Brighter Colors) -->
+            <div class="logo-item ai-logo" data-speed="2.0" data-delay="0.6">
+                <!-- ChatGPT Logo (Brighter Green) -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT" />
+            </div>
+            <div class="logo-item ai-logo" data-speed="1.7" data-delay="1.6">
+                <!-- Terraform Logo (Brighter Purple) -->
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#8C4FFF" d="M12.042 6.858v8.589l7.455 4.294v-8.589zM19.5 19.744l7.456 4.294v-8.589L19.5 11.155zM4.587 2.56v8.589l7.455 4.294V6.855zM12.042 23.446l7.455 4.294v-8.589l-7.455-4.294z"/>
+                </svg>
+            </div>
+            <div class="logo-item ai-logo" data-speed="2.3" data-delay="0.8">
+                <!-- MongoDB Logo (Brighter Green) -->
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#00C853" d="M15.9.087l.854 1.604c.192.296.4.558.645.802a22.406 22.406 0 012.004 2.266c1.447 1.9 2.423 4.01 3.12 6.292.418 1.394.645 2.824.662 4.27.07 4.323-1.412 8.035-4.4 11.12a12.7 12.7 0 01-1.57 1.342c-.296 0-.436-.227-.558-.436a3.589 3.589 0 01-.436-1.255c-.105-.523-.174-1.046-.14-1.586v-.244C16.057 24.21 15.796.21 15.9.087z"/>
+                    <path fill="#00C853" d="M15.9.034c-.035-.07-.07-.017-.105.17.017.35-.4.44.017.07.296.578.523 1.185.627 1.84a11.17 11.17 0 01-.314 4.55 13.3 13.3 0 01-1.47 3.557c-.838 1.47-1.907 2.714-3.052 3.924a13.513 13.513 0 00-1.799 2.196c-.47.767-.795 1.586-1.038 2.442-.244.94-.453 1.886-.627 2.823-.13.523-.174 1.046-.244 1.57a.403.403 0 00.14.384c.314.258.662.47 1.03.61.94.35 1.907.523 2.894.523.997.017 1.994-.105 2.962-.366.444-.122.888-.27 1.332-.436a.421.421 0 00.262-.296c.105-.523.122-1.064.14-1.604V.034z"/>
+                    <path fill="#FFF" d="M16.754 21.978c.07-.506.105-.994.105-1.5l-.105-1.902a447.848 447.848 0 00-.035-2.65c-.35.366-.087.767-.087 1.15a16.36 16.36 0 00-.279 1.39c-.174.75-.453 1.464-.767 2.162a10.2 10.2 0 01-.627 1.255c-.122.192-.244.4-.453.523h.017c-.035 0-.035.07-.07.105-.192.174-.453.296-.662.47a5.284 5.284 0 01-1.586.75 6.892 6.892 0 01-3.595.244 3.592 3.592 0 01-1.084-.4c-.296-.157-.627-.296-.888-.506-.035-.035-.07-.07-.087-.087a.49.49 0 01-.175-.244c.105.663.244 1.308.418 1.954.07.383.14.767.244 1.133.07.28.174.558.296.82a.381.381 0 00.14.192c.366.313.82.541 1.274.698a7.86 7.86 0 003.176.296c1.185-.122 2.32-.506 3.368-1.064.14-.087.279-.157.418-.244.192-.105.366-.227.558-.331.157-.105.314-.227.453-.349 0 0 .035-.035.035-.07a1.23 1.23 0 00.192-.192c.192-.21.366-.435.514-.68z"/>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="header-content">
+            <h1 class="glitch-text" data-text="Vibe Coding Roadmap">Vibe Coding Roadmap</h1>
+            <p class="subtitle">From Beginner to Advanced</p>
+            <div class="scroll-indicator">
+                <span>Scroll Down</span>
+                <div class="scroll-arrow"></div>
+            </div>
+        </div>
+        <div class="gradient-bg"></div>
+        <canvas id="particleCanvas"></canvas>
+    </header>
+
+    <nav class="navigation">
+        <div class="nav-container">
+            <div class="logo">
+                <svg class="logo-svg" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 0C8.05884 0 0 8.05884 0 18C0 27.9412 8.05884 36 18 36C27.9412 36 36 27.9412 36 18C36 8.05884 27.9412 0 18 0Z" fill="url(#paint0_linear)"/>
+                    <path d="M27 15L18 9L9 15V24L18 30L27 24V15Z" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M18 30V24" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M27 15L18 21L9 15" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 15L18 9L27 15L18 21L9 15Z" fill="rgba(255,255,255,0.3)"/>
+                    <path d="M18 21L27 15V24L18 30V21Z" fill="rgba(255,255,255,0.1)"/>
+                    <path d="M18 21L9 15V24L18 30V21Z" fill="rgba(255,255,255,0.2)"/>
+                    <defs>
+                        <linearGradient id="paint0_linear" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+                            <stop offset="0" stop-color="#6c63ff"/>
+                            <stop offset="1" stop-color="#4a00e0"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span>VIBE</span>CODE
+            </div>
+            <div class="nav-links">
+                <a href="#understanding">What is Vibe Coding</a>
+                <a href="#beginner">Beginner</a>
+                <a href="#intermediate">Intermediate</a>
+                <a href="#advanced">Advanced</a>
+                <a href="#pitfalls">Pitfalls</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="understanding" class="section">
+            <div class="container">
+                <h2 data-aos="fade-up">1. Understanding Vibe Coding</h2>
+                
+                <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>What is Vibe Coding?</h3>
+                    <p>Vibe coding is a fast, intuitive way to build software by describing what you want in natural language and letting AI generate the code. It emphasizes rapid iteration, experimentation, and minimal upfront planning. This emerging approach represents a paradigm shift in how developers interact with code, focusing on creative intent rather than syntax.</p>
+                </div>
+                
+                <div class="info-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Key Characteristics:</h3>
+                    <ul>
+                        <li><strong>AI-assisted development</strong> – Tools like Cursor, Replit, and Hostinger Horizons generate code from prompts.</li>
+                        <li><strong>Iterative refinement</strong> – Test, debug, and refine AI-generated code in cycles.</li>
+                        <li><strong>Low barrier to entry</strong> – Beginners can build apps without deep coding knowledge.</li>
+                        <li><strong>Natural language interfacing</strong> – Express your requirements in conversational language.</li>
+                        <li><strong>Rapid prototyping</strong> – Build functioning software in significantly less time.</li>
+                    </ul>
+                </div>
+                
+                <div class="comparison-table" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Traditional Coding vs. Vibe Coding</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Aspect</th>
+                                    <th>Traditional Coding</th>
+                                    <th>Vibe Coding</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Planning</strong></td>
+                                    <td>Detailed specs, architecture</td>
+                                    <td>Minimal upfront planning</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Execution</strong></td>
+                                    <td>Manual coding</td>
+                                    <td>AI generates code from prompts</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Debugging</strong></td>
+                                    <td>Manual debugging</td>
+                                    <td>AI-assisted fixes</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Best For</strong></td>
+                                    <td>Large-scale, mission-critical apps</td>
+                                    <td>Prototyping, indie projects</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Learning Curve</strong></td>
+                                    <td>Steep, requires syntax knowledge</td>
+                                    <td>Gentle, focuses on concepts</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Development Speed</strong></td>
+                                    <td>Measured, methodical</td>
+                                    <td>Rapid, experimental</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="info-card workflow" data-aos="fade-up" data-aos-delay="400">
+                    <h3>The Vibe Coding Workflow</h3>
+                    <ol>
+                        <li><strong>Describe</strong> - Express your requirements in natural language</li>
+                        <li><strong>Generate</strong> - Let AI create initial code implementation</li>
+                        <li><strong>Review</strong> - Examine the output for errors or improvements</li>
+                        <li><strong>Refine</strong> - Provide feedback to iterate on the solution</li>
+                        <li><strong>Test</strong> - Verify functionality and performance</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section id="beginner" class="section">
+            <div class="container">
+                <div class="section-headline">
+                    <h1 class="headline-text">BEGINNER</h1>
+                </div>
+                <h2 data-aos="fade-up">2. Beginner Level: Getting Started</h2>
+                
+                <div class="step-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Choose an AI Coding Tool</h3>
+                        <div class="tool-cards">
+                            <div class="tool">
+                                <h4>Browser-based (No Installation):</h4>
+                                <ul>
+                                    <li><strong>Replit (Ghostwriter AI)</strong> – Good for simple scripts and web apps</li>
+                                    <li><strong>Hostinger Horizons</strong> – No-code AI builder for full-stack apps</li>
+                                    <li><strong>GitHub Copilot</strong> – AI pair programming assistant that integrates with browsers</li>
+                                </ul>
+                            </div>
+                            <div class="tool">
+                                <h4>Installed IDEs:</h4>
+                                <ul>
+                                    <li><strong>Cursor</strong> – AI-powered VS Code fork with chat and autocomplete</li>
+                                    <li><strong>Bolt.new (StackBlitz)</strong> – Full-stack app builder with Figma integration</li>
+                                    <li><strong>VS Code + Extensions</strong> – Standard editor with AI extensions</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tool-tip">
+                            <p><strong>Recommendation:</strong> Start with Replit or Cursor for the easiest entry point.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Start with a Simple Project</h3>
+                        <p><strong>Example:</strong> A to-do list app or a personal portfolio site.</p>
+                        <div class="prompt-example">
+                            <h4>Prompt Examples:</h4>
+                            <div class="code-block">
+                                <pre><code>"Create a webpage with a blue background and a centered 'Hello World' heading."</code></pre>
+                            </div>
+                            <div class="code-block">
+                                <pre><code>"Build a to-do list where users can add and delete tasks."</code></pre>
+                            </div>
+                            <div class="code-block">
+                                <pre><code>"Create a simple calculator with basic operations."</code></pre>
+                            </div>
+                        </div>
+                        <div class="beginner-projects">
+                            <h4>Recommended First Projects:</h4>
+                            <ul>
+                                <li>Personal portfolio page</li>
+                                <li>Weather app using a free API</li>
+                                <li>Simple quiz application</li>
+                                <li>Basic note-taking app</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Test & Refine</h3>
+                        <ul>
+                            <li>Run the AI-generated code immediately.</li>
+                            <li>If it fails, ask the AI to debug:
+                                <div class="code-block">
+                                    <pre><code>"The button isn't working. Fix the JavaScript."</code></pre>
+                                </div>
+                            </li>
+                            <li>Add incremental features:
+                                <div class="code-block">
+                                    <pre><code>"Now add a dark mode toggle to the website."</code></pre>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="tips">
+                            <h4>Beginner Tips:</h4>
+                            <ul>
+                                <li>✔ Keep prompts simple and clear.</li>
+                                <li>✔ Test after every change.</li>
+                                <li>✔ Use version control (GitHub) to save working versions.</li>
+                                <li>✔ Learn from AI-generated code by asking for explanations.</li>
+                                <li>✔ Focus on understanding the result rather than just accepting it.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="intermediate" class="section">
+            <div class="container">
+                <div class="section-headline">
+                    <h1 class="headline-text">INTERMEDIATE</h1>
+                </div>
+                <h2 data-aos="fade-up">3. Intermediate Level: Building Full-Stack Apps</h2>
+                
+                <div class="step-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Define a Clear Spec</h3>
+                        <p>Use AI to draft a <strong>README</strong> with:</p>
+                        <ul>
+                            <li>Requirements</li>
+                            <li>Tech stack (e.g., Next.js + Supabase)</li>
+                            <li>Milestones (e.g., "User auth by Day 2")</li>
+                            <li>User stories and acceptance criteria</li>
+                            <li>Architecture diagrams</li>
+                        </ul>
+                        <div class="code-block">
+                            <pre><code>"Create a detailed README for a social media app for book lovers, including user stories, tech stack, 
+ and implementation timeline."</code></pre>
+                        </div>
+                        <p>Starting with clear specifications helps guide the AI to generate more appropriate code and reduces the need for major revisions later.</p>
+                    </div>
+                </div>
+                
+                <div class="step-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Use Structured AI Tools</h3>
+                        <ul>
+                            <li><strong>Tempo Labs</strong> – Generates PRDs and user flow diagrams</li>
+                            <li><strong>Lovable.dev</strong> – Lets you visually edit UI with AI</li>
+                            <li><strong>Continue (VS Code Extension)</strong> – Helps manage large codebases</li>
+                            <li><strong>Codesee</strong> – Visualizes codebase architecture</li>
+                            <li><strong>Mintlify</strong> – Generates documentation automatically</li>
+                        </ul>
+                        <div class="tool-comparison">
+                            <h4>Tool Selection Strategy:</h4>
+                            <p>Choose tools that complement your workflow. For visual thinkers, Lovable.dev offers UI prototyping. For systematic developers, Tempo Labs provides structured planning.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Implement Key Features</h3>
+                        <ol>
+                            <li>
+                                <strong>Frontend:</strong>
+                                <div class="code-block">
+                                    <pre><code>"Create a React form for user signup with validation."</code></pre>
+                                </div>
+                            </li>
+                            <li>
+                                <strong>Backend:</strong>
+                                <div class="code-block">
+                                    <pre><code>"Add a Node.js API endpoint for saving user data."</code></pre>
+                                </div>
+                            </li>
+                            <li>
+                                <strong>Database:</strong>
+                                <div class="code-block">
+                                    <pre><code>"Connect Supabase for authentication."</code></pre>
+                                </div>
+                            </li>
+                            <li>
+                                <strong>Integration:</strong>
+                                <div class="code-block">
+                                    <pre><code>"Link the frontend form to the API endpoint with proper error handling."</code></pre>
+                                </div>
+                            </li>
+                        </ol>
+
+                        <div class="intermediate-projects">
+                            <h4>Recommended Intermediate Projects:</h4>
+                            <ul>
+                                <li>E-commerce store with product listings and cart</li>
+                                <li>Social media dashboard with real-time updates</li>
+                                <li>Task management app with team collaboration</li>
+                                <li>Recipe app with search and filtering</li>
+                            </ul>
+                        </div>
+
+                        <div class="tips">
+                            <h4>Intermediate Tips:</h4>
+                            <ul>
+                                <li>✔ Break tasks into small steps (e.g., "Add login before payment").</li>
+                                <li>✔ Use AI to explain code: "How does this authentication flow work?"</li>
+                                <li>✔ Avoid scope creep—AI may overcomplicate things.</li>
+                                <li>✔ Create reusable components and have AI optimize them.</li>
+                                <li>✔ Learn to edit and customize AI-generated code rather than regenerating.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="advanced" class="section">
+            <div class="container">
+                <div class="section-headline">
+                    <h1 class="headline-text">ADVANCED</h1>
+                </div>
+                <h2 data-aos="fade-up">4. Advanced Level: Scaling & Optimization</h2>
+                
+                <div class="step-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Manage Large Codebases</h3>
+                        <ul>
+                            <li><strong>Cursor / Windsurf</strong> – Use MCP servers for context-aware coding</li>
+                            <li><strong>Augment</strong> – Indexes and analyzes existing code</li>
+                            <li><strong>GitHub Copilot Enterprise</strong> – Workspace-aware AI assistant</li>
+                            <li><strong>Cody</strong> – Context-aware code assistant with repository knowledge</li>
+                        </ul>
+                        <div class="advanced-strategy">
+                            <h4>Advanced Prompt Strategy:</h4>
+                            <p>Use multi-step prompting: first ask the AI to analyze the codebase structure, then to identify components for modification, and finally to implement specific changes with full context.</p>
+                            <div class="code-block">
+                                <pre><code>"Analyze this codebase and identify all places where user authentication is handled."</code></pre>
+                            </div>
+                            <div class="code-block">
+                                <pre><code>"Now update the authentication system to use JWT with refresh tokens."</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Debug & Optimize</h3>
+                        <div class="advanced-info">
+                            <h4>Common Issues:</h4>
+                            <ul>
+                                <li>AI "doom loops" (endless incorrect fixes) → Revert to checkpoints</li>
+                                <li>Security gaps → Manually review AI-generated auth logic</li>
+                                <li>Performance bottlenecks → Use AI to analyze and optimize</li>
+                                <li>Code duplication → Have AI identify and refactor</li>
+                            </ul>
+                            <h4>Prompt for Optimization:</h4>
+                            <div class="code-block">
+                                <pre><code>"Refactor this function for better performance."</code></pre>
+                            </div>
+                            <div class="code-block">
+                                <pre><code>"Analyze this React component for memory leaks and fix them."</code></pre>
+                            </div>
+                            <div class="code-block">
+                                <pre><code>"Optimize this database query that's causing performance issues."</code></pre>
+                            </div>
+                        </div>
+                        <div class="security-audit">
+                            <h4>AI-Assisted Security Audit:</h4>
+                            <p>Have AI conduct security reviews of critical code paths:</p>
+                            <div class="code-block">
+                                <pre><code>"Review this payment processing code for security vulnerabilities."</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Deploy & Maintain</h3>
+                        <ul>
+                            <li>Use <strong>Replit Deploy</strong> or <strong>Vercel</strong> for one-click hosting.</li>
+                            <li>Set up <strong>CI/CD pipelines</strong> for automated testing</li>
+                            <li>Implement <strong>monitoring</strong> and <strong>observability</strong> tools</li>
+                            <li>Create <strong>automatic backups</strong> and <strong>disaster recovery</strong> plans</li>
+                        </ul>
+                        <div class="deployment-automation">
+                            <h4>AI-Assisted Deployment:</h4>
+                            <div class="code-block">
+                                <pre><code>"Create a GitHub Actions workflow to automatically test and deploy my Next.js app to Vercel."</code></pre>
+                            </div>
+                        </div>
+                        <div class="advanced-projects">
+                            <h4>Recommended Advanced Projects:</h4>
+                            <ul>
+                                <li>SaaS platform with subscription billing</li>
+                                <li>Real-time collaboration tool with WebSockets</li>
+                                <li>AI-powered content recommendation system</li>
+                                <li>Multi-tenant application with custom domains</li>
+                            </ul>
+                        </div>
+                        <div class="tips">
+                            <h4>Advanced Tips:</h4>
+                            <ul>
+                                <li>✔ Use <strong>voice coding</strong> (SuperWhisper) for faster prompting</li>
+                                <li>✔ Document AI decisions for future maintainability</li>
+                                <li>✔ Balance AI speed with human oversight for production apps</li>
+                                <li>✔ Create custom prompt templates for recurring tasks</li>
+                                <li>✔ Build a library of AI-generated components with documentation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pitfalls" class="section">
+            <div class="container">
+                <h2 data-aos="fade-up">5. Pitfalls & How to Avoid Them</h2>
+                
+                <div class="pitfalls-table" data-aos="fade-up" data-aos-delay="100">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Pitfall</th>
+                                    <th>Solution</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Messy, unmaintainable code</strong></td>
+                                    <td>Refactor into modules early</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AI overcomplicating solutions</strong></td>
+                                    <td>Enforce simplicity rules: "Give me the simplest option first."</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Security risks</strong></td>
+                                    <td>Audit AI-generated code before production</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Context overload</strong></td>
+                                    <td>Reset AI sessions frequently</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Dependency hell</strong></td>
+                                    <td>Ask AI to use minimal dependencies and standard libraries</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Hallucinated features</strong></td>
+                                    <td>Verify AI claims about framework capabilities</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Technical debt accumulation</strong></td>
+                                    <td>Schedule regular refactoring sessions with AI assistance</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Over-reliance on AI</strong></td>
+                                    <td>Learn fundamentals alongside AI usage</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="common-mistakes" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Common Vibe Coding Mistakes</h3>
+                    <div class="mistake-cards">
+                        <div class="mistake-card">
+                            <h4>Unclear Prompts</h4>
+                            <p><strong>Problem:</strong> "Make it better" vs. <strong>Better:</strong> "Optimize this React component to prevent re-renders"</p>
+                        </div>
+                        <div class="mistake-card">
+                            <h4>Not Reviewing Code</h4>
+                            <p><strong>Problem:</strong> Accepting all AI suggestions without review</p>
+                            <p><strong>Solution:</strong> Always understand what the code does before implementing</p>
+                        </div>
+                        <div class="mistake-card">
+                            <h4>Prompt Amnesia</h4>
+                            <p><strong>Problem:</strong> Forgetting what you asked for earlier</p>
+                            <p><strong>Solution:</strong> Document important prompts in comments or README</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusion" class="section">
+            <div class="container">
+                <h2 data-aos="fade-up">Conclusion: The Future of Vibe Coding</h2>
+                <p data-aos="fade-up" data-aos-delay="100">
+                    Vibe coding is powerful for prototyping and indie projects but requires human oversight for scaling. 
+                    As AI improves, it will become a standard tool—but <strong>developer expertise remains crucial</strong> 
+                    for architecture, debugging, and security.
+                </p>
+                
+                <div class="organized-section" data-aos="fade-up" data-aos-delay="150">
+                    <h3>Emerging Trends:</h3>
+                    <ul class="organized-list">
+                        <li><strong>Multimodal AI</strong> - Generate code from sketches, diagrams, and voice</li>
+                        <li><strong>Domain-specific assistants</strong> - Specialized for game dev, data science, etc.</li>
+                        <li><strong>AI-native frameworks</strong> - Built specifically for AI-assisted development</li>
+                        <li><strong>Self-improving systems</strong> - Code that evolves with minimal human input</li>
+                    </ul>
+                </div>
+                
+                <div class="organized-section" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Next Steps:</h3>
+                    <ul class="organized-list">
+                        <li>Experiment with <strong>Cursor</strong> or <strong>Replit</strong>.</li>
+                        <li>Join communities like <strong>Hostinger Horizons Discord</strong>.</li>
+                        <li>Gradually move from small projects to full-stack apps.</li>
+                        <li>Subscribe to AI coding newsletters and follow leading practitioners.</li>
+                        <li>Share your experiences and contribute to best practices.</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-balance" data-aos="fade-up" data-aos-delay="250">
+                    <h3>Balancing AI and Skills:</h3>
+                    <p>The most successful vibe coders use AI to handle routine tasks while focusing their human expertise on:</p>
+                    
+                    <div class="skill-balance-grid">
+                        <div class="skill-area">
+                            <div class="skill-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5l10-5V7L12 2zm0 2.328l8 4v7.344l-8 4l-8-4V8.328l8-4zM12 6L6.5 9v6L12 18l5.5-3V9L12 6zm0 3.5l-1 1.5h2l-1-1.5z" fill="currentColor"/></svg>
+                            </div>
+                            <h4>Systems architecture and design patterns</h4>
+                        </div>
+                        
+                        <div class="skill-area">
+                            <div class="skill-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 2h16a2 2 0 0 1 2 2v14c0 1.103.897 2 2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 2v16h16V4H4zm8 3l4.5 8H15l-1-1.5H10L9 15H7.5L12 7zm0 3.5l-1 1.5h2l-1-1.5z" fill="currentColor"/></svg>
+                            </div>
+                            <h4>User experience and interface design</h4>
+                        </div>
+                        
+                        <div class="skill-area">
+                            <div class="skill-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V5h16l.002 14H4z M9 8h2v8H9zm4 0h2v8h-2z" fill="currentColor"/></svg>
+                            </div>
+                            <h4>Business logic and domain knowledge</h4>
+                        </div>
+                        
+                        <div class="skill-area">
+                            <div class="skill-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1l8.217 1.826a1 1 0 0 1 .783.976v9.987a6 6 0 0 1-2.672 4.992L12 23l-6.328-4.219A6 6 0 0 1 3 13.79V3.802a1 1 0 0 1 .783-.976L12 1zm0 2.049L5 4.604v9.185a4 4 0 0 0 1.781 3.328L12 20.597l5.219-3.48A4 4 0 0 0 19 13.79V4.604L12 3.05zm4.452 5.173l1.415 1.414L11.503 16 7.26 11.757l1.414-1.414 2.828 2.828 4.95-4.95z" fill="currentColor"/></svg>
+                            </div>
+                            <h4>Security, performance, and scalability</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="cta-button" data-aos="zoom-in" data-aos-delay="300">
+                    <a href="#">Start Your Vibe Coding Journey</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">VIBE<span>CODE</span></div>
+                <p>A next-generation approach to software development.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2023 Vibe Coding Roadmap. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
